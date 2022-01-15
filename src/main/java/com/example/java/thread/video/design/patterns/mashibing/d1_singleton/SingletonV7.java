@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.singleton;
+package com.example.java.thread.video.design.patterns.mashibing.d1_singleton;
 
 /**
  * 静态内部类方式
