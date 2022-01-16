@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp5_spring;
+package com.example.java.thread.video.design.patterns.mashibing.dp5_spring.v1;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,8 +11,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("app.xml");
-        Tank tank = (Tank)context.getBean("tank");
+        ApplicationContext context = new ClassPathXmlApplicationContext("app_auto.xml");
+        TankV1 tank = (TankV1)context.getBean("tank");
         tank.move();
     }
 }

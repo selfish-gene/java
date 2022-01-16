@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp5_spring;
+package com.example.java.thread.video.design.patterns.mashibing.dp5_spring.v1;
 
 /**
  * <b>Description</b>:<br>
