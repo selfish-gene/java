@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.d3_FactoryMethod;
+package com.example.java.thread.video.design.patterns.mashibing.dp3_FactoryMethod;
 
 /**
  * 简单工厂

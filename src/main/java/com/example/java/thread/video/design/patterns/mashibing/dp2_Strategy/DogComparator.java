@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.d2_Strategy;
+package com.example.java.thread.video.design.patterns.mashibing.dp2_Strategy;
 
 /**
  * <b>Description</b>:<br>

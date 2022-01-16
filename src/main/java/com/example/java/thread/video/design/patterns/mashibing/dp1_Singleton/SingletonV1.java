@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.d1_Singleton;
+package com.example.java.thread.video.design.patterns.mashibing.dp1_Singleton;
 
 /**
  * 饿汉式
