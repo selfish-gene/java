@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp5_Spring.v2;
+package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v2;
 
 /**
  * <b>Description</b>:<br>

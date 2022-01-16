@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp5_Spring.v2;
+package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v2;
 
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,12 +13,12 @@ import org.aspectj.lang.annotation.Before;
 @Aspect
 public class TimeProxy {
 
-    @Before("execution(void com.example.java.thread.video.design.patterns.mashibing.dp5_Spring.v2.TankV2.move())")
+    @Before("execution(void com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v2.TankV2.move())")
     public void before() {
         System.out.println("method start .. " + System.currentTimeMillis());
     }
 
-    @After("execution(void com.example.java.thread.video.design.patterns.mashibing.dp5_Spring.v2.TankV2.move())")
+    @After("execution(void com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v2.TankV2.move())")
     public void after() {
         System.out.println("method stop .. " + System.currentTimeMillis());
     }

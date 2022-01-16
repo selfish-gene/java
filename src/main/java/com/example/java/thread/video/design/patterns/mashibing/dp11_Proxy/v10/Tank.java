@@ -1,8 +1,9 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v9;
+package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v10;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.Arrays;
 
 /**
  * 问题：想记录坦克的移动时间
@@ -21,6 +22,9 @@ import java.lang.reflect.Proxy;
  * 使用jdk的动态代理
  * <p>
  * v09: 横切代码与业务逻辑代码分离 AOP
+ * <p>
+ * v10: 通过反射观察生成的代理对象
+ * jdk反射生成代理必须面向接口，这是由Proxy的内部实现决定的
  *
  * <b>Author</b>:anlei<br>
  * <b>Date</b>:2022/01/16 16:47<br>
@@ -29,6 +33,8 @@ public class Tank implements Movable {
 
     public static void main(String[] args) {
         Tank tank = new Tank();
+
+        System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
 
         // reflection 通过二进制字节码分析类的属性和方法
         Movable m = (Movable) Proxy.newProxyInstance(Tank.class.getClassLoader(), new Class[]{Movable.class}, new TimeProxy(tank));
@@ -51,10 +57,10 @@ public class Tank implements Movable {
 
 class TimeProxy implements InvocationHandler {
 
-    Tank tank;
+    Movable movable;
 
-    public TimeProxy(Tank tank) {
-        this.tank = tank;
+    public TimeProxy(Movable movable) {
+        this.movable = movable;
     }
 
     public void before() {
@@ -67,8 +73,9 @@ class TimeProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+//        Arrays.stream(proxy.getClass().getMethods()).map(Method::getName).forEach(System.out::println);
         before();
-        Object invoke = method.invoke(tank, args);
+        Object invoke = method.invoke(movable, args);
         after();
         return invoke;
     }

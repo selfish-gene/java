@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v5;
+package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v6;
 
 /**
  * 问题：想记录坦克的移动时间
@@ -6,6 +6,8 @@ package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v5;
  * 问题2：如果无法改变方法源码呢？
  * 用继承？
  * v05:使用代理
+ * v06:代理有各种类型
+ * 问题：如何实现代理的各种组合？继承？Decorator?
  *
  * <b>Author</b>:anlei<br>
  * <b>Date</b>:2022/01/16 16:47<br>
@@ -44,6 +46,22 @@ class TankTimeProxy implements Movable {
         tank.move();
         long end = System.currentTimeMillis();
         System.out.println(end - start);
+    }
+}
+
+class TankLogProxy implements Movable {
+
+    Tank tank;
+
+    public TankLogProxy(Tank tank) {
+        this.tank = tank;
+    }
+
+    @Override
+    public void move() {
+        System.out.println("start moving ...");
+        tank.move();
+        System.out.println("stopped ...");
     }
 }
 

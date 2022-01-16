@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v6;
+package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v7;
 
 /**
  * 问题：想记录坦克的移动时间
@@ -8,6 +8,7 @@ package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v6;
  * v05:使用代理
  * v06:代理有各种类型
  * 问题：如何实现代理的各种组合？继承？Decorator?
+ * v07:代理的对象改成Movable类型-越来越像decorator了
  *
  * <b>Author</b>:anlei<br>
  * <b>Date</b>:2022/01/16 16:47<br>
@@ -15,7 +16,12 @@ package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v6;
 public class Tank implements Movable {
 
     public static void main(String[] args) {
-        new TankTimeProxy(new Tank()).move();
+        Tank tank = new Tank();
+        TankTimeProxy tankTimeProxy = new TankTimeProxy(tank);
+        TankLogProxy tankLogProxy = new TankLogProxy(tank);
+//        tankTimeProxy.move();
+//        tankLogProxy.move();
+        new TankLogProxy(new TankTimeProxy(tank)).move();
     }
 
     /**
@@ -34,16 +40,16 @@ public class Tank implements Movable {
 
 class TankTimeProxy implements Movable {
 
-    Tank tank;
+    Movable m;
 
-    public TankTimeProxy(Tank tank) {
-        this.tank = tank;
+    public TankTimeProxy(Movable m) {
+        this.m = m;
     }
 
     @Override
     public void move() {
         long start = System.currentTimeMillis();
-        tank.move();
+        m.move();
         long end = System.currentTimeMillis();
         System.out.println(end - start);
     }
@@ -51,18 +57,17 @@ class TankTimeProxy implements Movable {
 
 class TankLogProxy implements Movable {
 
-    Tank tank;
+    Movable m;
 
-    public TankLogProxy(Tank tank) {
-        this.tank = tank;
+    public TankLogProxy(Movable m) {
+        this.m = m;
     }
 
     @Override
     public void move() {
-        long start = System.currentTimeMillis();
-        tank.move();
-        long end = System.currentTimeMillis();
-        System.out.println(end - start);
+        System.out.println("start moving ...");
+        m.move();
+        System.out.println("stopped ...");
     }
 }
 

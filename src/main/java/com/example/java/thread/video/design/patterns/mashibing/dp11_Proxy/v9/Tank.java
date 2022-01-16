@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v8;
+package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v9;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -19,6 +19,8 @@ import java.lang.reflect.Proxy;
  * （毕竟日志记录，时间计算是很多方法都需要的东西），这时该怎么做呢？
  * 分离代理行为与被代理对象
  * 使用jdk的动态代理
+ * <p>
+ * v09: 横切代码与业务逻辑代码分离 AOP
  *
  * <b>Author</b>:anlei<br>
  * <b>Date</b>:2022/01/16 16:47<br>
@@ -29,7 +31,7 @@ public class Tank implements Movable {
         Tank tank = new Tank();
 
         // reflection 通过二进制字节码分析类的属性和方法
-        Movable m = (Movable) Proxy.newProxyInstance(Tank.class.getClassLoader(), new Class[]{Movable.class}, new LogHandler(tank));
+        Movable m = (Movable) Proxy.newProxyInstance(Tank.class.getClassLoader(), new Class[]{Movable.class}, new TimeProxy(tank));
         m.move();
     }
 
@@ -47,19 +49,27 @@ public class Tank implements Movable {
     }
 }
 
-class LogHandler implements InvocationHandler {
+class TimeProxy implements InvocationHandler {
 
     Tank tank;
 
-    public LogHandler(Tank tank) {
+    public TimeProxy(Tank tank) {
         this.tank = tank;
+    }
+
+    public void before() {
+        System.out.println("method start..");
+    }
+
+    public void after() {
+        System.out.println("method stop..");
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("method " + method.getName() + " start...");
+        before();
         Object invoke = method.invoke(tank, args);
-        System.out.println("method " + method.getName() + " end!");
+        after();
         return invoke;
     }
 }

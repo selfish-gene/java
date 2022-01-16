@@ -1,9 +1,9 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v2;
+package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v3;
 
 /**
  * 问题：想记录坦克的移动时间
  * 最简单的办法：修改代码，记录时间
- * 问题2：如果无法改变方法源码呢？ benchmark
+ * 问题2：如果无法改变方法源码呢？
  *
  * <b>Author</b>:anlei<br>
  * <b>Date</b>:2022/01/16 16:47<br>

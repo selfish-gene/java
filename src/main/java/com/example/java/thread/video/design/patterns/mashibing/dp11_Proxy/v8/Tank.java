@@ -1,4 +1,8 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v7;
+package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v8;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * 问题：想记录坦克的移动时间
@@ -9,6 +13,12 @@ package com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.v7;
  * v06:代理有各种类型
  * 问题：如何实现代理的各种组合？继承？Decorator?
  * v07:代理的对象改成Movable类型-越来越像decorator了
+ * <p>
+ * v08:如果有stop方法需要代理...
+ * 如果想让LogProxy可以重用，不仅可以代理Tank，还可以代理任何其他可以代理的类型 Object
+ * （毕竟日志记录，时间计算是很多方法都需要的东西），这时该怎么做呢？
+ * 分离代理行为与被代理对象
+ * 使用jdk的动态代理
  *
  * <b>Author</b>:anlei<br>
  * <b>Date</b>:2022/01/16 16:47<br>
@@ -17,11 +27,9 @@ public class Tank implements Movable {
 
     public static void main(String[] args) {
         Tank tank = new Tank();
-        TankTimeProxy tankTimeProxy = new TankTimeProxy(tank);
-        TankLogProxy tankLogProxy = new TankLogProxy(tank);
-//        tankTimeProxy.move();
-//        tankLogProxy.move();
-        new TankLogProxy(new TankTimeProxy(tank)).move();
+        // reflection 通过二进制字节码分析类的属性和方法
+        Movable m = (Movable) Proxy.newProxyInstance(Tank.class.getClassLoader(), new Class[]{Movable.class}, new LogHandler(tank));
+        m.move();
     }
 
     /**
@@ -38,36 +46,20 @@ public class Tank implements Movable {
     }
 }
 
-class TankTimeProxy implements Movable {
+class LogHandler implements InvocationHandler {
 
-    Movable m;
+    Tank tank;
 
-    public TankTimeProxy(Movable m) {
-        this.m = m;
+    public LogHandler(Tank tank) {
+        this.tank = tank;
     }
 
     @Override
-    public void move() {
-        long start = System.currentTimeMillis();
-        m.move();
-        long end = System.currentTimeMillis();
-        System.out.println(end - start);
-    }
-}
-
-class TankLogProxy implements Movable {
-
-    Movable m;
-
-    public TankLogProxy(Movable m) {
-        this.m = m;
-    }
-
-    @Override
-    public void move() {
-        System.out.println("start moving ...");
-        m.move();
-        System.out.println("stopped ...");
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        System.out.println("method " + method.getName() + " start...");
+        Object invoke = method.invoke(tank, args);
+        System.out.println("method " + method.getName() + " end!");
+        return invoke;
     }
 }
 
