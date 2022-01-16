@@ -1,4 +1,4 @@
-package com.example.java.thread.video.design.patterns.mashibing.dp5_spring.v1;
+package com.example.java.thread.video.design.patterns.mashibing.dp5_Spring.v2;
 
 /**
  * <b>Description</b>:<br>
@@ -6,7 +6,7 @@ package com.example.java.thread.video.design.patterns.mashibing.dp5_spring.v1;
  * <b>Author</b>:anlei<br>
  * <b>Date</b>:2022/01/16 8:40<br>
  */
-public class TankV1 {
+public class TankV2 {
 
     public void move(){
         System.out.println("Tank move cla cla cla ...");
