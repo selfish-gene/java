@@ -17,7 +17,7 @@
     -->
     <aop:aspectj-autoproxy/>
 
-    <bean id="tank" class="com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v2.TankV2"/>
-    <bean id="timeProxy" class="com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v2.TimeProxy"/>
+    <bean id="tank" class="com.example.java.video.design.patterns.mashibing.dp11_Proxy.aop.v2.TankV2"/>
+    <bean id="timeProxy" class="com.example.java.video.design.patterns.mashibing.dp11_Proxy.aop.v2.TimeProxy"/>
 
 </beans>

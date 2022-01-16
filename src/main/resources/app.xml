@@ -16,12 +16,12 @@
 
     -->
 
-    <bean id="tank" class="com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v1.TankV1"/>
-    <bean id="timeProxy" class="com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v1.TimeProxy"/>
+    <bean id="tank" class="com.example.java.video.design.patterns.mashibing.dp11_Proxy.aop.v1.TankV1"/>
+    <bean id="timeProxy" class="com.example.java.video.design.patterns.mashibing.dp11_Proxy.aop.v1.TimeProxy"/>
 
     <aop:config>
         <aop:aspect id="time" ref="timeProxy">
-            <aop:pointcut id="onmove" expression="execution(void com.example.java.thread.video.design.patterns.mashibing.dp11_Proxy.aop.v1.TankV1.move())"/>
+            <aop:pointcut id="onmove" expression="execution(void com.example.java.video.design.patterns.mashibing.dp11_Proxy.aop.v1.TankV1.move())"/>
             <aop:before method="before" pointcut-ref="onmove"/>
             <aop:after method="after" pointcut-ref="onmove"/>
         </aop:aspect>
